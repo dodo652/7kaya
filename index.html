@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7kaya - Clothing Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="lang-toggle">
+        <button id="lang-btn" onclick="toggleLanguage()">العربية</button>
+    </div>
+    <header>
+        <div class="logo">7kaya</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="openSignUpModal()">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignUpModal()">×</span>
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderModal()">×</span>
+            <h2>Place Order</h2>
+            <form id="order-form">
+                <select id="size" required>
+                    <option value="" disabled selected>Select Size</option>
+                    <option value="XXS">XXS</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+                <input type="number" id="quantity" placeholder="Quantity" min="1" required>
+                <input type="hidden" id="product-name">
+                <button type="submit" class="btn">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+    <section id="home" class="hero">
+        <h1>Welcome to 7kaya</h1>
+        <p>Shop the latest fashion trends your way</p>
+        <a href="#products" class="btn">Shop Now</a>
+    </section>
+    <section id="products" class="products">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="Black T-Shirt">
+                <h3>Black T-Shirt</h3>
+                <p>100 EGP</p>
+                <button class="btn cart-btn" onclick="addToCart('Black T-Shirt')">Add to Cart</button>
+                <button class="btn buy-btn" onclick="openOrderModal('Black T-Shirt')">Buy Now</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200" alt="White Pants">
+                <h3>White Pants</h3>
+                <p>150 EGP</p>
+                <button class="btn cart-btn" onclick="addToCart('White Pants')">Add to Cart</button>
+                <button class="btn buy-btn" onclick="openOrderModal('White Pants')">Buy Now</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 7kaya. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
