@@ -9,6 +9,7 @@
 <body>
   <div class="language-switch">
     <button id="langToggle">العربية</button>
+    <button id="cartButton" onclick="openCart()">Cart</button>
   </div>
   <header class="hero">
     <h1>7kaya</h1>
@@ -48,6 +49,14 @@
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password" required>
         <button onclick="submitSignUp()">Submit</button>
+      </div>
+    </div>
+    <div id="cartPopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closeCart()">×</span>
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkoutCart()">Checkout</button>
       </div>
     </div>
   </main>
