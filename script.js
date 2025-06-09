@@ -30,7 +30,7 @@ function goProducts() {
   document.getElementById('homeSection').style.display = 'none';
 }
 
-function openSignUp() {
+function openLoginSignup() {
   document.getElementById('signUpForm').style.display = 'flex';
 }
 
@@ -58,7 +58,7 @@ function submitSignUp() {
 function openPopup(productId) {
   const popup = document.getElementById('productPopup');
   const products = {
-    'hikaya': { name: 'حكاية', price: 650, image: 'https://i.imgur.com/4zL7e5h.jpg' }
+    'pyramids': { name: 'Pyramids T-shirt', price: 650, image: 'https://i.imgur.com/4zL7e5h.jpg' }
   };
   const product = products[productId];
   document.getElementById('popupTitle').textContent = product.name;
@@ -73,7 +73,7 @@ function closePopup() {
 
 function buyNow() {
   if (!localStorage.getItem('user')) {
-    openSignUp();
+    openLoginSignup();
     return;
   }
   const size = document.getElementById('size').value;
@@ -96,7 +96,7 @@ function buyNow() {
 
 function addToCart() {
   if (!localStorage.getItem('user')) {
-    openSignUp();
+    openLoginSignup();
     return;
   }
   const size = document.getElementById('size').value;
@@ -132,7 +132,7 @@ function closeCart() {
 
 function checkoutCart() {
   if (!localStorage.getItem('user')) {
-    openSignUp();
+    openLoginSignup();
     return;
   }
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -160,7 +160,7 @@ function openProfile() {
     document.getElementById('newUsername').value = '';
     profilePopup.style.display = 'flex';
   } else {
-    openSignUp();
+    openLoginSignup();
   }
 }
 
