@@ -3,39 +3,30 @@ document.getElementById('langToggle').addEventListener('click', () => {
   lang = lang === 'ar' ? 'en' : 'ar';
   document.getElementById('langToggle').textContent = lang === 'ar' ? 'العربية' : 'English';
   updateLanguage();
-  updateWelcome();
 });
 
 function updateLanguage() {
-  document.querySelector('h1').textContent = lang === 'ar' ? '7kaya' : '7kaya';
-  document.querySelectorAll('.form-popup h2, .popup h2').forEach(h2 => {
-    h2.textContent = lang === 'ar' ? 'Sign Up' : 'Sign Up';
-  });
-  const navButtons = document.querySelectorAll('.nav-menu button');
-  navButtons[0].textContent = lang === 'ar' ? 'الرئيسية' : 'Home';
-  navButtons[1].textContent = lang === 'ar' ? 'المتجر' : 'Shop';
-  navButtons[2].textContent = lang === 'ar' ? 'السلة' : 'Cart';
-  navButtons[3].textContent = lang === 'ar' ? 'الملف الشخصي' : 'Profile';
-  updateWelcome();
-}
-
-function updateWelcome() {
-  const user = localStorage.getItem('user');
   const welcomeText = document.getElementById('welcomeText');
-  if (user) {
-    welcomeText.textContent = lang === 'ar' ? `مرحبًا ${user}، 7kaya` : `Welcome ${user}, 7kaya`;
+  const storeDescription = document.getElementById('storeDescription');
+  const productsTitle = document.getElementById('productsTitle');
+  if (lang === 'ar') {
+    welcomeText.textContent = 'مرحبًا بكم في 7kaya';
+    storeDescription.textContent = '7kaya، متجر ملابس عصري يملكه 3 مراهقين. كنا نحاول إيجاد ملابس تناسبنا لكن لم نجد، لذا أنشأنا هذا المتجر للأشخاص الذين يواجهون نفس المشكلة مثلنا.';
+    productsTitle.textContent = 'هنا ستجد جميع منتجاتنا';
   } else {
-    welcomeText.textContent = lang === 'ar' ? '7kaya' : '7kaya';
+    welcomeText.textContent = 'Welcome to 7kaya';
+    storeDescription.textContent = '7kaya, is a trendy cloth shop owned by 3 teenagers. We were trying to find a cloth that can fit on us but we didn’t, so we did that store for people that have that problem like us.';
+    productsTitle.textContent = 'Here will you find all our products';
   }
 }
 
 function goHome() {
   document.getElementById('homeSection').style.display = 'block';
-  document.getElementById('shopSection').style.display = 'none';
+  document.getElementById('productsSection').style.display = 'none';
 }
 
-function goShop() {
-  document.getElementById('shopSection').style.display = 'flex';
+function goProducts() {
+  document.getElementById('productsSection').style.display = 'block';
   document.getElementById('homeSection').style.display = 'none';
 }
 
@@ -59,7 +50,6 @@ function submitSignUp() {
     alert('Sign up successful! Check your email.');
     closeSignUp();
     localStorage.setItem('user', username);
-    updateWelcome();
   }, (error) => {
     alert('Sign up failed!');
   });
@@ -183,7 +173,6 @@ function updateUsername() {
   if (newUsername) {
     localStorage.setItem('user', newUsername);
     alert('Username updated successfully!');
-    updateWelcome();
     closeProfile();
   } else {
     alert('Please enter a new username!');
