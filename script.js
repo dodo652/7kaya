@@ -21,10 +21,12 @@ function openLogin() {
   }
   closeSignUp();
   document.getElementById('loginForm').style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }
 
 function closeLogin() {
   document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
   document.getElementById('dropdownMenu').classList.remove('show');
 }
 
@@ -49,10 +51,12 @@ function openSignUp() {
   }
   closeLogin();
   document.getElementById('signUpForm').style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }
 
 function closeSignUp() {
   document.getElementById('signUpForm').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
   document.getElementById('dropdownMenu').classList.remove('show');
 }
 
@@ -83,10 +87,12 @@ function openCart() {
     });
   }
   document.getElementById('cartPopup').style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }
 
 function closeCart() {
   document.getElementById('cartPopup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
 }
 
 function checkoutCart() {
@@ -114,10 +120,12 @@ function openProductDetails(productId) {
   document.getElementById('productTitle').textContent = product.name;
   document.getElementById('productPrice').textContent = product.price;
   popup.style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }
 
 function closeProductDetails() {
   document.getElementById('productDetails').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
 }
 
 function addToCart() {
