@@ -1,25 +1,20 @@
-let lang = 'ar';
 let cart = [];
+let loggedInUser = localStorage.getItem('user') || null;
 
-document.getElementById('langToggle').addEventListener('click', () => {
-  lang = lang === 'ar' ? 'en' : 'ar';
-  document.getElementById('langToggle').textContent = lang === 'ar' ? 'العربية' : 'English';
-  updateLanguage();
-});
-
-function updateLanguage() {
+function updateWelcome() {
   const welcomeText = document.getElementById('welcomeText');
-  const productsTitle = document.getElementById('productsTitle');
-  if (lang === 'ar') {
-    welcomeText.textContent = 'مرحبًا بكم في، 7kaya';
-    productsTitle.textContent = 'هنا ستجد جميع منتجاتنا';
+  if (loggedInUser) {
+    welcomeText.textContent = `Welcome to, 7kaya - ${loggedInUser}`;
   } else {
     welcomeText.textContent = 'Welcome to, 7kaya';
-    productsTitle.textContent = 'Here will you find all our products';
   }
 }
 
 function openLogin() {
+  if (loggedInUser) {
+    alert('You are already logged in!');
+    return;
+  }
   document.getElementById('loginForm').style.display = 'flex';
 }
 
@@ -31,9 +26,37 @@ function login() {
   const username = document.getElementById('loginUsername').value;
   const password = document.getElementById('loginPassword').value;
   if (username && password) {
-    alert(`Login successful! Welcome, ${username}`);
-    localStorage.setItem('user', username);
+    loggedInUser = username;
+    localStorage.setItem('user', loggedInUser);
+    alert(`Login successful! Welcome, ${loggedInUser}`);
     closeLogin();
+    updateWelcome();
+  } else {
+    alert('Please enter username and password!');
+  }
+}
+
+function openSignUp() {
+  if (loggedInUser) {
+    alert('You are already logged in!');
+    return;
+  }
+  document.getElementById('signUpForm').style.display = 'flex';
+}
+
+function closeSignUp() {
+  document.getElementById('signUpForm').style.display = 'none';
+}
+
+function signUp() {
+  const username = document.getElementById('signupUsername').value;
+  const password = document.getElementById('signupPassword').value;
+  if (username && password) {
+    alert(`Sign up successful! Welcome, ${username}. Please log in.`);
+    closeSignUp();
+    document.getElementById('loginForm').style.display = 'flex';
+    document.getElementById('loginUsername').value = username;
+    document.getElementById('loginPassword').value = password;
   } else {
     alert('Please enter username and password!');
   }
@@ -42,11 +65,15 @@ function login() {
 function openCart() {
   const cartItems = document.getElementById('cartItems');
   cartItems.innerHTML = '';
-  cart.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.name} - Size: ${item.size} - Quantity: ${item.quantity} - Price: ${item.price} EGP`;
-    cartItems.appendChild(li);
-  });
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<li>Cart is empty!</li>';
+  } else {
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - Size: ${item.size} - Quantity: ${item.quantity} - Price: ${item.price} EGP`;
+      cartItems.appendChild(li);
+    });
+  }
   document.getElementById('cartPopup').style.display = 'flex';
 }
 
@@ -55,6 +82,11 @@ function closeCart() {
 }
 
 function checkoutCart() {
+  if (!loggedInUser) {
+    alert('Please log in to proceed with the purchase!');
+    openLogin();
+    return;
+  }
   if (cart.length === 0) {
     alert('Cart is empty!');
     return;
@@ -81,6 +113,11 @@ function closePopup() {
 }
 
 function addToCart() {
+  if (!loggedInUser) {
+    alert('Please log in to add items to cart!');
+    openLogin();
+    return;
+  }
   const size = document.getElementById('size').value;
   const quantity = document.getElementById('quantity').value;
   const name = document.getElementById('popupTitle').textContent;
@@ -94,7 +131,7 @@ function searchProducts() {
   const input = document.getElementById('searchInput').value.toLowerCase();
   const products = document.querySelectorAll('.product');
   products.forEach(product => {
-    const productName = product.querySelector('h3').textContent.toLowerCase();
+    const productName = product.getAttribute('data-name').toLowerCase();
     if (productName.includes(input)) {
       product.style.display = 'block';
     } else {
@@ -102,3 +139,6 @@ function searchProducts() {
     }
   });
 }
+
+// Initial call to set welcome message
+updateWelcome();
