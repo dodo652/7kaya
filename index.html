@@ -12,30 +12,19 @@
   </div>
   <main>
     <div id="homeSection" style="display: block;">
-      <h1 id="welcomeText"></h1>
-      <p id="storeDescription"></p>
-      <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Pyramids T-shirt" class="home-image">
-    </div>
-    <div id="productsSection" style="display: none;">
-      <h2 id="productsTitle"></h2>
-      <div class="products">
-        <div class="product" onclick="openPopup('pyramids')">
-          <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Pyramids T-shirt">
-          <h3>Pyramids T-shirt</h3>
+      <div class="welcome-container">
+        <h1 id="welcomeText">Welcome to, 7kaya</h1>
+        <button onclick="openLoginSignup()" class="login-btn">Login/Signup</button>
+      </div>
+      <div id="productsSection" style="display: none;">
+        <h2 id="productsTitle"></h2>
+        <div class="products">
+          <!-- Products will be added dynamically -->
         </div>
       </div>
     </div>
-    <div id="profilePopup" class="popup" style="display: none;">
-      <div class="popup-content">
-        <span class="close" onclick="closeProfile()">×</span>
-        <h2>Profile</h2>
-        <p id="profileUsername"></p>
-        <input type="text" id="newUsername" placeholder="New Username">
-        <button onclick="updateUsername()">Update Username</button>
-      </div>
-    </div>
     <div id="signUpForm" class="form-popup" style="display: none;">
-      <div class="form-content">
+      <div class="form-content full-screen">
         <span class="close" onclick="closeSignUp()">×</span>
         <h2>Sign Up</h2>
         <input type="text" id="username" placeholder="Username" required>
@@ -44,46 +33,8 @@
         <button onclick="submitSignUp()">Submit</button>
       </div>
     </div>
-    <div id="cartPopup" class="popup" style="display: none;">
-      <div class="popup-content">
-        <span class="close" onclick="closeCart()">×</span>
-        <h2>Cart</h2>
-        <ul id="cartItems"></ul>
-        <button onclick="checkoutCart()">Checkout</button>
-      </div>
-    </div>
-    <div id="productPopup" class="popup" style="display: none;">
-      <div class="popup-content">
-        <span class="close" onclick="closePopup()">×</span>
-        <h2 id="popupTitle"></h2>
-        <img id="popupImage" src="" alt="Product Image">
-        <p>Price: <span id="popupPrice"></span> EGP</p>
-        <label for="size">Size:</label>
-        <select id="size">
-          <option value="XXS">XXS</option>
-          <option value="XS">XS</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-        </select>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" min="1" value="1">
-        <button onclick="buyNow()">Buy Now</button>
-        <button onclick="addToCart()">Add to Cart</button>
-      </div>
-    </div>
-    <nav class="top-nav">
-      <button onclick="goHome()">Home</button>
-      <button onclick="openLoginSignup()">Login/Signup</button>
-      <button onclick="openCart()">Cart</button>
-    </nav>
-    <nav class="bottom-nav">
-      <button onclick="goHome()">Home</button>
-      <button onclick="goProducts()">Products</button>
-      <button onclick="openProfile()">Profile</button>
-    </nav>
     <footer>
-      <p>©2024 All Rights Reserved</p>
+      <p>All rights reserved to 7kaya</p>
     </footer>
   </main>
   <script src="script.js"></script>
