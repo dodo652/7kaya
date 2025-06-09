@@ -7,28 +7,48 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-    <img src="https://i.imgur.com/0x4Z7rG.png" alt="Hikaya Logo" class="logo">
-    <div class="icons">
-      <span class="search-icon">🔍</span>
-      <span class="profile-icon" onclick="openProfile()">👤</span>
-      <span class="cart-icon" onclick="openCart()">🛒</span>
-    </div>
+  <div class="language-switch">
+    <button id="langToggle">العربية</button>
   </div>
-  <nav class="nav-menu">
-    <button onclick="goHome()">Home</button>
-    <button onclick="goShop()">Shop</button>
-    <button onclick="openCart()">Cart</button>
-    <button onclick="openProfile()">Profile</button>
-  </nav>
-  <header class="hero">
-    <h1 id="welcomeText"></h1>
-  </header>
   <main>
-    <div class="products" id="shopSection" style="display: flex;">
-      <div class="product" onclick="openPopup('hikaya')">
-        <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Hikaya T-shirt">
-        <h3>حكاية</h3>
+    <div id="homeSection" style="display: block;">
+      <h1 id="welcomeText"></h1>
+      <p id="storeDescription"></p>
+    </div>
+    <div id="productsSection" style="display: none;">
+      <h2 id="productsTitle"></h2>
+      <div class="products">
+        <div class="product" onclick="openPopup('hikaya')">
+          <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Hikaya T-shirt">
+          <h3>حكاية</h3>
+        </div>
+      </div>
+    </div>
+    <div id="profilePopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closeProfile()">×</span>
+        <h2>Profile</h2>
+        <p id="profileUsername"></p>
+        <input type="text" id="newUsername" placeholder="New Username">
+        <button onclick="updateUsername()">Update Username</button>
+      </div>
+    </div>
+    <div id="signUpForm" class="form-popup" style="display: none;">
+      <div class="form-content">
+        <span class="close" onclick="closeSignUp()">×</span>
+        <h2>Sign Up</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="submitSignUp()">Submit</button>
+      </div>
+    </div>
+    <div id="cartPopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closeCart()">×</span>
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkoutCart()">Checkout</button>
       </div>
     </div>
     <div id="productPopup" class="popup" style="display: none;">
@@ -51,37 +71,11 @@
         <button onclick="addToCart()">Add to Cart</button>
       </div>
     </div>
-    <div id="signUpForm" class="form-popup" style="display: none;">
-      <div class="form-content">
-        <span class="close" onclick="closeSignUp()">×</span>
-        <h2>Sign Up</h2>
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button onclick="submitSignUp()">Submit</button>
-      </div>
-    </div>
-    <div id="cartPopup" class="popup" style="display: none;">
-      <div class="popup-content">
-        <span class="close" onclick="closeCart()">×</span>
-        <h2>Cart</h2>
-        <ul id="cartItems"></ul>
-        <button onclick="checkoutCart()">Checkout</button>
-      </div>
-    </div>
-    <div id="profilePopup" class="popup" style="display: none;">
-      <div class="popup-content">
-        <span class="close" onclick="closeProfile()">×</span>
-        <h2>Profile</h2>
-        <p id="profileUsername"></p>
-        <input type="text" id="newUsername" placeholder="New Username">
-        <button onclick="updateUsername()">Update Username</button>
-      </div>
-    </div>
-    <div id="homeSection" style="display: none;">
-      <h2>About Store</h2>
-      <p>Welcome to 7kaya, your premier destination for unique clothing!</p>
-    </div>
+    <nav class="nav-menu">
+      <button onclick="goHome()">Home</button>
+      <button onclick="goProducts()">Products</button>
+      <button onclick="openProfile()">Profile</button>
+    </nav>
   </main>
   <script src="script.js"></script>
 </body>
