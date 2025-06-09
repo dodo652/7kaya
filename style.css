@@ -55,6 +55,29 @@ body {
   animation: fadeIn 1s ease-in, slideDown 1s ease-out;
 }
 
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+}
+
+.nav-menu button {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-menu button:hover {
+  background: #000;
+  color: #fff;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -162,6 +185,11 @@ button {
 button:hover {
   background: #333;
   transform: translateY(-2px);
+}
+
+#homeSection, #shopSection {
+  padding: 20px;
+  text-align: center;
 }
 
 @keyframes fadeIn {
