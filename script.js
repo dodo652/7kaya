@@ -1,104 +1,144 @@
-let loggedInUser = localStorage.getItem("user") || null;
 let cart = [];
-
-function showSection(id) {
-  document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  if (id === "profileSection") updateProfile();
-  if (id === "cartSection") updateCart();
-}
+let loggedInUser = localStorage.getItem('user') || null;
 
 function updateWelcome() {
-  const welcomeText = document.getElementById("welcomeText");
+  const welcomeText = document.getElementById('welcomeText');
   if (loggedInUser) {
     welcomeText.textContent = `Welcome to, 7kaya - ${loggedInUser}`;
   } else {
-    welcomeText.textContent = "Welcome to, 7kaya";
+    welcomeText.textContent = 'Welcome to, 7kaya';
   }
 }
 
-function updateProfile() {
-  const profile = document.getElementById("profileContent");
-  if (!loggedInUser) {
-    profile.innerHTML = `
-      <button onclick="loginPrompt()">Login</button>
-      <button onclick="signupPrompt()">Signup</button>
-    `;
-  } else {
-    profile.innerHTML = `
-      <p>Welcome, ${loggedInUser}</p>
-      <button onclick="changeName()">Change Name</button>
-      <button onclick="logout()">Logout</button>
-      <button onclick="deleteAccount()">Delete Account</button>
-    `;
+function openLogin() {
+  if (loggedInUser) {
+    alert('You are already logged in!');
+    return;
   }
+  document.getElementById('loginForm').style.display = 'flex';
 }
 
-function loginPrompt() {
-  const name = prompt("Enter username:");
-  if (name) {
-    loggedInUser = name;
-    localStorage.setItem("user", name);
+function closeLogin() {
+  document.getElementById('loginForm').style.display = 'none';
+}
+
+function login() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  if (username && password) {
+    loggedInUser = username;
+    localStorage.setItem('user', loggedInUser);
+    alert(`Login successful! Welcome, ${loggedInUser}`);
+    closeLogin();
     updateWelcome();
-    updateProfile();
-    alert("Logged in!");
+  } else {
+    alert('Please enter username and password!');
   }
 }
 
-function signupPrompt() {
-  loginPrompt(); // Simple for now
+function openSignUp() {
+  if (loggedInUser) {
+    alert('You are already logged in!');
+    return;
+  }
+  document.getElementById('signUpForm').style.display = 'flex';
 }
 
-function logout() {
-  loggedInUser = null;
-  localStorage.removeItem("user");
-  updateWelcome();
-  updateProfile();
+function closeSignUp() {
+  document.getElementById('signUpForm').style.display = 'none';
 }
 
-function deleteAccount() {
-  logout();
-  alert("Account deleted.");
+function signUp() {
+  const username = document.getElementById('signupUsername').value;
+  const password = document.getElementById('signupPassword').value;
+  if (username && password) {
+    alert(`Sign up successful! Welcome, ${username}. Please log in.`);
+    closeSignUp();
+    document.getElementById('loginForm').style.display = 'flex';
+    document.getElementById('loginUsername').value = username;
+    document.getElementById('loginPassword').value = password;
+  } else {
+    alert('Please enter username and password!');
+  }
 }
 
-function updateCart() {
-  const cartItems = document.getElementById("cartItems");
-  cartItems.innerHTML = "";
+function openCart() {
+  const cartItems = document.getElementById('cartItems');
+  cartItems.innerHTML = '';
   if (cart.length === 0) {
-    cartItems.innerHTML = "<li>Cart is empty!</li>";
+    cartItems.innerHTML = '<li>Cart is empty!</li>';
   } else {
     cart.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = `${item.name} - ${item.quantity} × ${item.price} EGP`;
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - Size: ${item.size} - Quantity: ${item.quantity} - Price: ${item.price} EGP`;
       cartItems.appendChild(li);
     });
   }
+  document.getElementById('cartPopup').style.display = 'flex';
+}
+
+function closeCart() {
+  document.getElementById('cartPopup').style.display = 'none';
+}
+
+function checkoutCart() {
+  if (!loggedInUser) {
+    alert('Please log in to proceed with the purchase!');
+    openLogin();
+    return;
+  }
+  if (cart.length === 0) {
+    alert('Cart is empty!');
+    return;
+  }
+  alert('Purchase successful! Thank you for shopping with 7kaya.');
+  cart = [];
+  closeCart();
 }
 
 function openPopup(productId) {
+  const popup = document.getElementById('productPopup');
   const products = {
-    pyramid: { name: "Pyramid T-shirt", price: 550 },
-    underground: { name: "Underground T-shirt", price: 500 },
+    'pyramid': { name: 'Pyramid T-shirt', price: 650 },
+    'underground': { name: 'Underground T-shirt', price: 600 }
   };
-  const p = products[productId];
-  const quantity = prompt(`Add ${p.name}. Quantity?`);
+  const product = products[productId];
+  document.getElementById('popupTitle').textContent = product.name;
+  document.getElementById('popupPrice').textContent = product.price;
+  popup.style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('productPopup').style.display = 'none';
+}
+
+function addToCart() {
   if (!loggedInUser) {
-    alert("Please login first!");
+    alert('Please log in to add items to cart!');
+    openLogin();
     return;
   }
-  if (quantity && !isNaN(quantity)) {
-    cart.push({ name: p.name, quantity: quantity, price: p.price });
-    alert("Added to cart!");
-  }
+  const size = document.getElementById('size').value;
+  const quantity = document.getElementById('quantity').value;
+  const name = document.getElementById('popupTitle').textContent;
+  const price = document.getElementById('popupPrice').textContent;
+  cart.push({ name, price, size, quantity });
+  alert(`${name} added to cart!`);
+  closePopup();
 }
 
 function searchProducts() {
-  const val = document.getElementById("searchInput").value.toLowerCase();
-  document.querySelectorAll(".product").forEach(p => {
-    const name = p.getAttribute("data-name").toLowerCase();
-    p.style.display = name.includes(val) ? "block" : "none";
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const products = document.querySelectorAll('.product');
+  products.forEach(product => {
+    const productName = product.getAttribute('data-name').toLowerCase();
+    if (productName.includes(input)) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
   });
 }
 
+// Initial call to set welcome message
 updateWelcome();
-showSection("homeSection");
