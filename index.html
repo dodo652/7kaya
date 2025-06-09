@@ -14,13 +14,14 @@
     <div id="homeSection" style="display: block;">
       <h1 id="welcomeText"></h1>
       <p id="storeDescription"></p>
+      <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Pyramids T-shirt" class="home-image">
     </div>
     <div id="productsSection" style="display: none;">
       <h2 id="productsTitle"></h2>
       <div class="products">
-        <div class="product" onclick="openPopup('hikaya')">
-          <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Hikaya T-shirt">
-          <h3>حكاية</h3>
+        <div class="product" onclick="openPopup('pyramids')">
+          <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Pyramids T-shirt">
+          <h3>Pyramids T-shirt</h3>
         </div>
       </div>
     </div>
@@ -71,11 +72,19 @@
         <button onclick="addToCart()">Add to Cart</button>
       </div>
     </div>
-    <nav class="nav-menu">
+    <nav class="top-nav">
+      <button onclick="goHome()">Home</button>
+      <button onclick="openLoginSignup()">Login/Signup</button>
+      <button onclick="openCart()">Cart</button>
+    </nav>
+    <nav class="bottom-nav">
       <button onclick="goHome()">Home</button>
       <button onclick="goProducts()">Products</button>
       <button onclick="openProfile()">Profile</button>
     </nav>
+    <footer>
+      <p>©2024 All Rights Reserved</p>
+    </footer>
   </main>
   <script src="script.js"></script>
 </body>
