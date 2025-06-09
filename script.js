@@ -1,8 +1,14 @@
 let currentUser = localStorage.getItem("username") || null;
 
 function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+  const pages = document.querySelectorAll(".page");
+  pages.forEach(p => {
+    p.classList.add("hidden");
+  });
+
+  const selected = document.getElementById(id);
+  selected.classList.remove("hidden");
+
   if (id === "home") updateWelcome();
   if (id === "profile") updateProfile();
 }
@@ -72,6 +78,3 @@ function logout() {
   updateProfile();
   updateWelcome();
 }
-
-// Show home by default
-showPage("home");
