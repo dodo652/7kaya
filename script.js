@@ -3,6 +3,7 @@ document.getElementById('langToggle').addEventListener('click', () => {
   lang = lang === 'ar' ? 'en' : 'ar';
   document.getElementById('langToggle').textContent = lang === 'ar' ? 'العربية' : 'English';
   updateLanguage();
+  updateWelcome();
 });
 
 function updateLanguage() {
@@ -10,6 +11,32 @@ function updateLanguage() {
   document.querySelectorAll('.form-popup h2, .popup h2').forEach(h2 => {
     h2.textContent = lang === 'ar' ? 'Sign Up' : 'Sign Up';
   });
+  const navButtons = document.querySelectorAll('.nav-menu button');
+  navButtons[0].textContent = lang === 'ar' ? 'الرئيسية' : 'Home';
+  navButtons[1].textContent = lang === 'ar' ? 'المتجر' : 'Shop';
+  navButtons[2].textContent = lang === 'ar' ? 'السلة' : 'Cart';
+  navButtons[3].textContent = lang === 'ar' ? 'الملف الشخصي' : 'Profile';
+  updateWelcome();
+}
+
+function updateWelcome() {
+  const user = localStorage.getItem('user');
+  const welcomeText = document.getElementById('welcomeText');
+  if (user) {
+    welcomeText.textContent = lang === 'ar' ? `مرحبًا ${user}، 7kaya` : `Welcome ${user}, 7kaya`;
+  } else {
+    welcomeText.textContent = lang === 'ar' ? '7kaya' : '7kaya';
+  }
+}
+
+function goHome() {
+  document.getElementById('homeSection').style.display = 'block';
+  document.getElementById('shopSection').style.display = 'none';
+}
+
+function goShop() {
+  document.getElementById('shopSection').style.display = 'flex';
+  document.getElementById('homeSection').style.display = 'none';
 }
 
 function openSignUp() {
@@ -32,6 +59,7 @@ function submitSignUp() {
     alert('Sign up successful! Check your email.');
     closeSignUp();
     localStorage.setItem('user', username);
+    updateWelcome();
   }, (error) => {
     alert('Sign up failed!');
   });
@@ -131,4 +159,33 @@ function checkoutCart() {
   }, (error) => {
     alert('Checkout failed!');
   });
+}
+
+function openProfile() {
+  const profilePopup = document.getElementById('profilePopup');
+  const user = localStorage.getItem('user');
+  const profileUsername = document.getElementById('profileUsername');
+  if (user) {
+    profileUsername.textContent = `Username: ${user}`;
+    document.getElementById('newUsername').value = '';
+    profilePopup.style.display = 'flex';
+  } else {
+    openSignUp();
+  }
+}
+
+function closeProfile() {
+  document.getElementById('profilePopup').style.display = 'none';
+}
+
+function updateUsername() {
+  const newUsername = document.getElementById('newUsername').value;
+  if (newUsername) {
+    localStorage.setItem('user', newUsername);
+    alert('Username updated successfully!');
+    updateWelcome();
+    closeProfile();
+  } else {
+    alert('Please enter a new username!');
+  }
 }
