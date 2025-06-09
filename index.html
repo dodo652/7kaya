@@ -7,53 +7,59 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="language-switch">
-    <button id="langToggle">العربية</button>
-  </div>
   <main>
-    <div id="homeSection" style="display: block;">
-      <h1 id="welcomeText">Welcome to, 7kaya</h1>
+    <div id="homeSection" class="fade-in">
+      <h1 id="welcomeText" class="slide-down">Welcome to, 7kaya</h1>
       <div class="top-buttons">
-        <button onclick="openLogin()" class="login-btn">Login</button>
-        <button onclick="openCart()" class="cart-btn">Cart</button>
+        <button onclick="openLogin()" class="login-btn bounce">Login</button>
+        <button onclick="openCart()" class="cart-btn bounce">Cart</button>
         <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Search in 7kaya" onkeyup="searchProducts()">
+          <input type="text" id="searchInput" placeholder="Search in 7kaya" onkeyup="searchProducts()" class="search-input fade-in">
         </div>
       </div>
-      <div id="productsSection">
+      <div id="productsSection" class="fade-in-up">
         <div class="products">
-          <div class="product" onclick="openPopup('pyramid')">
+          <div class="product" onclick="openPopup('pyramid')" data-name="Pyramid T-shirt">
             <h3>Pyramid T-shirt</h3>
           </div>
-          <div class="product" onclick="openPopup('underground')">
+          <div class="product" onclick="openPopup('underground')" data-name="Underground T-shirt">
             <h3>Underground T-shirt</h3>
           </div>
         </div>
       </div>
-      <div class="slogan">
+      <div class="slogan fade-in">
         <p>WE’RE THE RIGHT</p>
         <p>#7kaya</p>
       </div>
     </div>
     <div id="loginForm" class="form-popup" style="display: none;">
-      <div class="form-content">
+      <div class="form-content slide-in">
         <span class="close" onclick="closeLogin()">×</span>
         <h2>Login</h2>
         <input type="text" id="loginUsername" placeholder="Username" required>
         <input type="password" id="loginPassword" placeholder="Password" required>
-        <button onclick="login()">Login</button>
+        <button onclick="login()" class="bounce">Login</button>
+      </div>
+    </div>
+    <div id="signUpForm" class="form-popup" style="display: none;">
+      <div class="form-content slide-in">
+        <span class="close" onclick="closeSignUp()">×</span>
+        <h2>Sign Up</h2>
+        <input type="text" id="signupUsername" placeholder="Username" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <button onclick="signUp()" class="bounce">Sign Up</button>
       </div>
     </div>
     <div id="cartPopup" class="popup" style="display: none;">
-      <div class="popup-content">
+      <div class="popup-content slide-in">
         <span class="close" onclick="closeCart()">×</span>
         <h2>Cart</h2>
         <ul id="cartItems"></ul>
-        <button onclick="checkoutCart()">Buy Now</button>
+        <button onclick="checkoutCart()" class="bounce">Buy Now</button>
       </div>
     </div>
     <div id="productPopup" class="popup" style="display: none;">
-      <div class="popup-content">
+      <div class="popup-content slide-in">
         <span class="close" onclick="closePopup()">×</span>
         <h2 id="popupTitle"></h2>
         <p>Price: <span id="popupPrice"></span> EGP</p>
@@ -67,7 +73,7 @@
         </select>
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" min="1" value="1">
-        <button onclick="addToCart()">Add to Cart</button>
+        <button onclick="addToCart()" class="bounce">Add to Cart</button>
       </div>
     </div>
     <footer>
