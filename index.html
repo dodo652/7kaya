@@ -7,23 +7,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="language-switch">
-    <button id="langToggle">العربية</button>
+  <div class="header">
+    <img src="https://i.imgur.com/0x4Z7rG.png" alt="Hikaya Logo" class="logo">
+    <div class="icons">
+      <span class="search-icon">🔍</span>
+      <span class="profile-icon" onclick="openProfile()">👤</span>
+      <span class="cart-icon" onclick="openCart()">🛒</span>
+    </div>
   </div>
-  <header class="hero">
-    <h1 id="welcomeText"></h1>
-  </header>
   <nav class="nav-menu">
     <button onclick="goHome()">Home</button>
     <button onclick="goShop()">Shop</button>
     <button onclick="openCart()">Cart</button>
     <button onclick="openProfile()">Profile</button>
   </nav>
+  <header class="hero">
+    <h1 id="welcomeText"></h1>
+  </header>
   <main>
-    <div class="products" id="shopSection" style="display: none;">
-      <div class="product" onclick="openPopup('pyramid')">
-        <img src="https://i.imgur.com/URL_DA_SORAH.jpg" alt="Pyramid T-shirt">
-        <h3>Pyramid T-shirt</h3>
+    <div class="products" id="shopSection" style="display: flex;">
+      <div class="product" onclick="openPopup('hikaya')">
+        <img src="https://i.imgur.com/4zL7e5h.jpg" alt="Hikaya T-shirt">
+        <h3>حكاية</h3>
       </div>
     </div>
     <div id="productPopup" class="popup" style="display: none;">
