@@ -10,16 +10,22 @@ function updateWelcome() {
   }
 }
 
+function toggleDropdown() {
+  document.getElementById('dropdownMenu').classList.toggle('show');
+}
+
 function openLogin() {
   if (loggedInUser) {
     alert('You are already logged in!');
     return;
   }
+  closeSignUp();
   document.getElementById('loginForm').style.display = 'flex';
 }
 
 function closeLogin() {
   document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('dropdownMenu').classList.remove('show');
 }
 
 function login() {
@@ -41,11 +47,13 @@ function openSignUp() {
     alert('You are already logged in!');
     return;
   }
+  closeLogin();
   document.getElementById('signUpForm').style.display = 'flex';
 }
 
 function closeSignUp() {
   document.getElementById('signUpForm').style.display = 'none';
+  document.getElementById('dropdownMenu').classList.remove('show');
 }
 
 function signUp() {
@@ -96,20 +104,20 @@ function checkoutCart() {
   closeCart();
 }
 
-function openPopup(productId) {
-  const popup = document.getElementById('productPopup');
+function openProductDetails(productId) {
+  const popup = document.getElementById('productDetails');
   const products = {
     'pyramid': { name: 'Pyramid T-shirt', price: 650 },
     'underground': { name: 'Underground T-shirt', price: 600 }
   };
   const product = products[productId];
-  document.getElementById('popupTitle').textContent = product.name;
-  document.getElementById('popupPrice').textContent = product.price;
+  document.getElementById('productTitle').textContent = product.name;
+  document.getElementById('productPrice').textContent = product.price;
   popup.style.display = 'flex';
 }
 
-function closePopup() {
-  document.getElementById('productPopup').style.display = 'none';
+function closeProductDetails() {
+  document.getElementById('productDetails').style.display = 'none';
 }
 
 function addToCart() {
@@ -120,11 +128,27 @@ function addToCart() {
   }
   const size = document.getElementById('size').value;
   const quantity = document.getElementById('quantity').value;
-  const name = document.getElementById('popupTitle').textContent;
-  const price = document.getElementById('popupPrice').textContent;
+  const name = document.getElementById('productTitle').textContent;
+  const price = document.getElementById('productPrice').textContent;
   cart.push({ name, price, size, quantity });
   alert(`${name} added to cart!`);
-  closePopup();
+  closeProductDetails();
+}
+
+function buyNow() {
+  if (!loggedInUser) {
+    alert('Please log in to proceed with the purchase!');
+    openLogin();
+    return;
+  }
+  const size = document.getElementById('size').value;
+  const quantity = document.getElementById('quantity').value;
+  const name = document.getElementById('productTitle').textContent;
+  const price = document.getElementById('productPrice').textContent;
+  cart.push({ name, price, size, quantity });
+  alert(`Purchased ${name} successfully!`);
+  cart = [];
+  closeProductDetails();
 }
 
 function searchProducts() {
@@ -142,3 +166,16 @@ function searchProducts() {
 
 // Initial call to set welcome message
 updateWelcome();
+
+// Close dropdown when clicking outside
+window.onclick = function(event) {
+  if (!event.target.matches('.login-btn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
