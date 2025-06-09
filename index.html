@@ -7,87 +7,40 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <div id="homeSection" class="fade-in">
-      <h1 id="welcomeText" class="slide-down">Welcome to, 7kaya</h1>
-      <div class="top-buttons">
-        <div class="dropdown">
-          <button onclick="toggleDropdown()" class="login-btn bounce">Login/Signup</button>
-          <div id="dropdownMenu" class="dropdown-content">
-            <button onclick="openLogin()" class="dropdown-item">Login</button>
-            <p>Don’t have an account yet? <span onclick="openSignUp()" class="register-link">register here</span></p>
-          </div>
-        </div>
-        <button onclick="openCart()" class="cart-btn bounce">Cart</button>
-        <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Search in 7kaya" onkeyup="searchProducts()" class="search-input fade-in">
-        </div>
-      </div>
-      <div id="productsSection" class="fade-in-up">
-        <div class="products">
-          <div class="product" onclick="openProductDetails('pyramid')" data-name="Pyramid T-shirt" data-img="pyramid-tshirt.jpg" data-price="650">
-            <h3>Pyramid T-shirt</h3>
-          </div>
-          <div class="product" onclick="openProductDetails('underground')" data-name="Underground T-shirt" data-img="underground-tshirt.jpg" data-price="600">
-            <h3>Underground T-shirt</h3>
-          </div>
-        </div>
-      </div>
-      <div class="slogan fade-in">
-        <p>WE’RE THE RIGHT</p>
-        <p>#7kaya</p>
-      </div>
+  <header>
+    <h1 id="welcome-text">Welcome to, 7kaya</h1>
+    <button id="langBtn">غير اللغة</button>
+  </header>
+  <div class="container">
+    <div id="login-container" style="display:none"></div>
+    <div id="register-container" style="display:none"></div>
+    <div id="shop-container" style="display:none">
+      <h2 id="user-display"></h2>
+      <button id="btn-logout" onclick="logout()">تسجيل خروج</button>
+      <div class="products-wrapper" id="products-wrapper"></div>
     </div>
-    <div id="overlay" class="overlay" style="display: none;"></div>
-    <div id="loginForm" class="form-popup full-screen" style="display: none;">
-      <div class="form-content slide-in">
-        <span class="close" onclick="closeLogin()">×</span>
-        <h2>Login</h2>
-        <input type="text" id="loginUsername" placeholder="Username" required>
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button onclick="login()" class="bounce">Login</button>
-      </div>
+  </div>
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="closeBtn">×</span>
+      <img id="modalImg" src="" alt="Product Image">
+      <h3 id="modalName"></h3>
+      <p id="unitPriceText"></p>
+      <label id="label-size"></label>
+      <select id="size">
+        <option value="XXS">XXS</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+      </select>
+      <label id="label-qty"></label>
+      <input type="number" id="quantityInput" min="1" value="1">
+      <p id="totalPriceText"></p>
+      <button onclick="addToCart()">إضافة إلى السلة</button>
+      <button onclick="buyNow()">اشترِ الآن</button>
     </div>
-    <div id="signUpForm" class="form-popup full-screen" style="display: none;">
-      <div class="form-content slide-in">
-        <span class="close" onclick="closeSignUp()">×</span>
-        <h2>Sign Up</h2>
-        <input type="text" id="signupUsername" placeholder="Username" required>
-        <input type="password" id="signupPassword" placeholder="Password" required>
-        <button onclick="signUp()" class="bounce">Sign Up</button>
-      </div>
-    </div>
-    <div id="cartPopup" class="form-popup full-screen" style="display: none;">
-      <div class="form-content slide-in">
-        <span class="close" onclick="closeCart()">×</span>
-        <h2>Cart</h2>
-        <ul id="cartItems"></ul>
-        <button onclick="checkoutCart()" class="bounce">Buy Now</button>
-      </div>
-    </div>
-    <div id="productDetails" class="form-popup full-screen" style="display: none;">
-      <div class="form-content slide-in">
-        <span class="close" onclick="closeProductDetails()">×</span>
-        <h2 id="productTitle"></h2>
-        <p>Price: <span id="productPrice"></span> EGP</p>
-        <label for="size">Size:</label>
-        <select id="size">
-          <option value="XXS">XXS</option>
-          <option value="XS">XS</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-        </select>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" min="1" value="1">
-        <button onclick="addToCart()" class="bounce">Add to Cart</button>
-        <button onclick="buyNow()" class="bounce">Buy Now</button>
-      </div>
-    </div>
-    <footer>
-      <p>© All rights reserved to, 7kaya</p>
-    </footer>
-  </main>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
