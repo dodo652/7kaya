@@ -12,29 +12,66 @@
   </div>
   <main>
     <div id="homeSection" style="display: block;">
-      <div class="welcome-container">
-        <h1 id="welcomeText">Welcome to, 7kaya</h1>
-        <button onclick="openLoginSignup()" class="login-btn">Login/Signup</button>
-      </div>
-      <div id="productsSection" style="display: none;">
-        <h2 id="productsTitle"></h2>
-        <div class="products">
-          <!-- Products will be added dynamically -->
+      <h1 id="welcomeText">Welcome to, 7kaya</h1>
+      <div class="top-buttons">
+        <button onclick="openLogin()" class="login-btn">Login</button>
+        <button onclick="openCart()" class="cart-btn">Cart</button>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search in 7kaya" onkeyup="searchProducts()">
         </div>
       </div>
+      <div id="productsSection">
+        <div class="products">
+          <div class="product" onclick="openPopup('pyramid')">
+            <h3>Pyramid T-shirt</h3>
+          </div>
+          <div class="product" onclick="openPopup('underground')">
+            <h3>Underground T-shirt</h3>
+          </div>
+        </div>
+      </div>
+      <div class="slogan">
+        <p>WE’RE THE RIGHT</p>
+        <p>#7kaya</p>
+      </div>
     </div>
-    <div id="signUpForm" class="form-popup" style="display: none;">
-      <div class="form-content full-screen">
-        <span class="close" onclick="closeSignUp()">×</span>
-        <h2>Sign Up</h2>
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button onclick="submitSignUp()">Submit</button>
+    <div id="loginForm" class="form-popup" style="display: none;">
+      <div class="form-content">
+        <span class="close" onclick="closeLogin()">×</span>
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+    <div id="cartPopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closeCart()">×</span>
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkoutCart()">Buy Now</button>
+      </div>
+    </div>
+    <div id="productPopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closePopup()">×</span>
+        <h2 id="popupTitle"></h2>
+        <p>Price: <span id="popupPrice"></span> EGP</p>
+        <label for="size">Size:</label>
+        <select id="size">
+          <option value="XXS">XXS</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1">
+        <button onclick="addToCart()">Add to Cart</button>
       </div>
     </div>
     <footer>
-      <p>All rights reserved to 7kaya</p>
+      <p>© All rights reserved to, 7kaya</p>
     </footer>
   </main>
   <script src="script.js"></script>
