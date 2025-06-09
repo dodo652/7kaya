@@ -9,13 +9,18 @@
 <body>
   <div class="language-switch">
     <button id="langToggle">العربية</button>
-    <button id="cartButton" onclick="openCart()">Cart</button>
   </div>
   <header class="hero">
-    <h1>7kaya</h1>
+    <h1 id="welcomeText"></h1>
   </header>
+  <nav class="nav-menu">
+    <button onclick="goHome()">Home</button>
+    <button onclick="goShop()">Shop</button>
+    <button onclick="openCart()">Cart</button>
+    <button onclick="openProfile()">Profile</button>
+  </nav>
   <main>
-    <div class="products">
+    <div class="products" id="shopSection" style="display: none;">
       <div class="product" onclick="openPopup('pyramid')">
         <img src="https://i.imgur.com/URL_DA_SORAH.jpg" alt="Pyramid T-shirt">
         <h3>Pyramid T-shirt</h3>
@@ -58,6 +63,19 @@
         <ul id="cartItems"></ul>
         <button onclick="checkoutCart()">Checkout</button>
       </div>
+    </div>
+    <div id="profilePopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close" onclick="closeProfile()">×</span>
+        <h2>Profile</h2>
+        <p id="profileUsername"></p>
+        <input type="text" id="newUsername" placeholder="New Username">
+        <button onclick="updateUsername()">Update Username</button>
+      </div>
+    </div>
+    <div id="homeSection" style="display: none;">
+      <h2>About Store</h2>
+      <p>Welcome to 7kaya, your premier destination for unique clothing!</p>
     </div>
   </main>
   <script src="script.js"></script>
