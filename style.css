@@ -6,6 +6,7 @@ body {
   direction: rtl;
   overflow-x: hidden;
   height: 100vh;
+  position: relative;
 }
 
 .language-switch {
@@ -45,7 +46,13 @@ body {
 #storeDescription {
   font-size: 1.2em;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
+}
+
+.home-image {
+  max-width: 100%;
+  max-height: 300px;
+  margin-top: 20px;
 }
 
 .products {
@@ -159,7 +166,18 @@ button:hover {
   transform: translateY(-2px);
 }
 
-.nav-menu {
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.1);
+}
+
+.bottom-nav {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -168,6 +186,17 @@ button:hover {
   bottom: 0;
   width: 100%;
   background: rgba(0,0,0,0.1);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: -50px;
+  width: 100%;
+  background: #f0f0f0;
+  font-size: 0.8em;
+  color: #666;
 }
 
 @keyframes fadeIn {
