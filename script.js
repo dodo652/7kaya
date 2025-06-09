@@ -68,7 +68,7 @@ function submitSignUp() {
 function openPopup(productId) {
   const popup = document.getElementById('productPopup');
   const products = {
-    'pyramid': { name: 'Pyramid T-shirt', price: 550, image: 'https://i.imgur.com/URL_DA_SORAH.jpg' }
+    'hikaya': { name: 'حكاية', price: 650, image: 'https://i.imgur.com/4zL7e5h.jpg' }
   };
   const product = products[productId];
   document.getElementById('popupTitle').textContent = product.name;
