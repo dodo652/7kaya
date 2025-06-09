@@ -1,63 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7kaya</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body onload="showPage('home')">
-
-  <main id="content">
-    <section id="home" class="page">
-      <h1>Welcome to, 7kaya</h1>
-      <p id="welcome-user"></p>
-      <div class="tagline">
-        <h2>WE’RE THE RIGHT</h2>
-        <h3>#7kaya</h3>
+<body>
+  <main>
+    <div id="homeSection" class="fade-in">
+      <h1 id="welcomeText" class="slide-down">Welcome to, 7kaya</h1>
+      <div class="top-buttons">
+        <button onclick="openLogin()" class="login-btn bounce">Login</button>
+        <button onclick="openCart()" class="cart-btn bounce">Cart</button>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search in 7kaya" onkeyup="searchProducts()" class="search-input fade-in">
+        </div>
       </div>
-    </section>
-
-    <section id="products" class="page hidden">
-      <h1>Products</h1>
-      <div class="product">
-        <h2>Pyramid T-shirt</h2>
-        <p>550 EGP</p>
+      <div id="productsSection" class="fade-in-up">
+        <div class="products">
+          <div class="product" onclick="openPopup('pyramid')" data-name="Pyramid T-shirt">
+            <h3>Pyramid T-shirt</h3>
+          </div>
+          <div class="product" onclick="openPopup('underground')" data-name="Underground T-shirt">
+            <h3>Underground T-shirt</h3>
+          </div>
+        </div>
       </div>
-      <div class="product">
-        <h2>Underground T-shirt</h2>
-        <p>500 EGP</p>
+      <div class="slogan fade-in">
+        <p>WE’RE THE RIGHT</p>
+        <p>#7kaya</p>
       </div>
-    </section>
-
-    <section id="search" class="page hidden">
-      <h1>Search</h1>
-      <p>Feature under development</p>
-    </section>
-
-    <section id="cart" class="page hidden">
-      <h1>Cart</h1>
-      <p>Your cart is empty.</p>
-    </section>
-
-    <section id="profile" class="page hidden">
-      <h1>Profile</h1>
-      <div id="profile-content"></div>
-    </section>
+    </div>
+    <div id="loginForm" class="form-popup" style="display: none;">
+      <div class="form-content slide-in">
+        <span class="close" onclick="closeLogin()">×</span>
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button onclick="login()" class="bounce">Login</button>
+      </div>
+    </div>
+    <div id="signUpForm" class="form-popup" style="display: none;">
+      <div class="form-content slide-in">
+        <span class="close" onclick="closeSignUp()">×</span>
+        <h2>Sign Up</h2>
+        <input type="text" id="signupUsername" placeholder="Username" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <button onclick="signUp()" class="bounce">Sign Up</button>
+      </div>
+    </div>
+    <div id="cartPopup" class="popup" style="display: none;">
+      <div class="popup-content slide-in">
+        <span class="close" onclick="closeCart()">×</span>
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkoutCart()" class="bounce">Buy Now</button>
+      </div>
+    </div>
+    <div id="productPopup" class="popup" style="display: none;">
+      <div class="popup-content slide-in">
+        <span class="close" onclick="closePopup()">×</span>
+        <h2 id="popupTitle"></h2>
+        <p>Price: <span id="popupPrice"></span> EGP</p>
+        <label for="size">Size:</label>
+        <select id="size">
+          <option value="XXS">XXS</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1">
+        <button onclick="addToCart()" class="bounce">Add to Cart</button>
+      </div>
+    </div>
+    <footer>
+      <p>© All rights reserved to, 7kaya</p>
+    </footer>
   </main>
-
-  <footer>
-    <p>© All rights reserved to, 7kaya</p>
-  </footer>
-
-  <nav class="bottom-nav">
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('products')">Products</button>
-    <button onclick="showPage('search')">Search</button>
-    <button onclick="showPage('cart')">Cart</button>
-    <button onclick="showPage('profile')">Profile</button>
-  </nav>
-
   <script src="script.js"></script>
 </body>
 </html>
