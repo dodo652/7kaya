@@ -1,67 +1,104 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>7kaya</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main>
-    <!-- Home -->
-    <section id="homeSection" class="section active">
-      <h1 id="welcomeText">Welcome to, 7kaya</h1>
-      <div class="slogan">
-        <p>WE’RE THE RIGHT</p>
-        <p>#7kaya</p>
-      </div>
-    </section>
+let lang = 'ar';
+let cart = [];
 
-    <!-- Products -->
-    <section id="productsSection" class="section">
-      <h2>Products</h2>
-      <div class="products">
-        <div class="product" onclick="openPopup('pyramid')" data-name="Pyramid T-shirt">
-          <h3>Pyramid T-shirt</h3>
-          <p>550 EGP</p>
-        </div>
-        <div class="product" onclick="openPopup('underground')" data-name="Underground T-shirt">
-          <h3>Underground T-shirt</h3>
-          <p>500 EGP</p>
-        </div>
-      </div>
-    </section>
+document.getElementById('langToggle').addEventListener('click', () => {
+  lang = lang === 'ar' ? 'en' : 'ar';
+  document.getElementById('langToggle').textContent = lang === 'ar' ? 'العربية' : 'English';
+  updateLanguage();
+});
 
-    <!-- Search -->
-    <section id="searchSection" class="section">
-      <input type="text" id="searchInput" placeholder="ابحث عن منتج" onkeyup="searchProducts()">
-    </section>
+function updateLanguage() {
+  const welcomeText = document.getElementById('welcomeText');
+  const productsTitle = document.getElementById('productsTitle');
+  if (lang === 'ar') {
+    welcomeText.textContent = 'مرحبًا بكم في، 7kaya';
+    productsTitle.textContent = 'هنا ستجد جميع منتجاتنا';
+  } else {
+    welcomeText.textContent = 'Welcome to, 7kaya';
+    productsTitle.textContent = 'Here will you find all our products';
+  }
+}
 
-    <!-- Cart -->
-    <section id="cartSection" class="section">
-      <h2>Cart</h2>
-      <ul id="cartItems"></ul>
-    </section>
+function openLogin() {
+  document.getElementById('loginForm').style.display = 'flex';
+}
 
-    <!-- Profile -->
-    <section id="profileSection" class="section">
-      <div id="profileContent"></div>
-    </section>
+function closeLogin() {
+  document.getElementById('loginForm').style.display = 'none';
+}
 
-    <!-- Popup, login, etc. remain same as في كودك الحالي -->
+function login() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  if (username && password) {
+    alert(`Login successful! Welcome, ${username}`);
+    localStorage.setItem('user', username);
+    closeLogin();
+  } else {
+    alert('Please enter username and password!');
+  }
+}
 
-    <footer>© All rights reserved to, 7kaya</footer>
-  </main>
+function openCart() {
+  const cartItems = document.getElementById('cartItems');
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.name} - Size: ${item.size} - Quantity: ${item.quantity} - Price: ${item.price} EGP`;
+    cartItems.appendChild(li);
+  });
+  document.getElementById('cartPopup').style.display = 'flex';
+}
 
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav">
-    <button onclick="showSection('homeSection')">Home</button>
-    <button onclick="showSection('productsSection')">Products</button>
-    <button onclick="showSection('searchSection')">Search</button>
-    <button onclick="showSection('cartSection')">Cart</button>
-    <button onclick="showSection('profileSection')">Profile</button>
-  </nav>
+function closeCart() {
+  document.getElementById('cartPopup').style.display = 'none';
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+function checkoutCart() {
+  if (cart.length === 0) {
+    alert('Cart is empty!');
+    return;
+  }
+  alert('Purchase successful! Thank you for shopping with 7kaya.');
+  cart = [];
+  closeCart();
+}
+
+function openPopup(productId) {
+  const popup = document.getElementById('productPopup');
+  const products = {
+    'pyramid': { name: 'Pyramid T-shirt', price: 650 },
+    'underground': { name: 'Underground T-shirt', price: 600 }
+  };
+  const product = products[productId];
+  document.getElementById('popupTitle').textContent = product.name;
+  document.getElementById('popupPrice').textContent = product.price;
+  popup.style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('productPopup').style.display = 'none';
+}
+
+function addToCart() {
+  const size = document.getElementById('size').value;
+  const quantity = document.getElementById('quantity').value;
+  const name = document.getElementById('popupTitle').textContent;
+  const price = document.getElementById('popupPrice').textContent;
+  cart.push({ name, price, size, quantity });
+  alert(`${name} added to cart!`);
+  closePopup();
+}
+
+function searchProducts() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const products = document.querySelectorAll('.product');
+  products.forEach(product => {
+    const productName = product.querySelector('h3').textContent.toLowerCase();
+    if (productName.includes(input)) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
+  });
+}
